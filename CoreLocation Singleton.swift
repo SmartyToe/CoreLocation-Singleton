@@ -19,13 +19,15 @@ class CoreLocationServiceManager: NSObject, CLLocationManagerDelegate {
     // MARK: - shared CoreLocation Service Manager
 
     
-    private static var sharedLcationManager: LocationServiceManager = {
+    private static var sharedLcationManager: CoreLocationServiceManager = {
         
         let locationServiceManager = CoreLocationServiceManager()
         
         return locationServiceManager
         
     }()
+    
+    let debugMode:String = "debugMode"
     
     var DEBUG:Bool { return UserDefaults.standard.bool(forKey: debugMode) }
     
@@ -49,7 +51,7 @@ class CoreLocationServiceManager: NSObject, CLLocationManagerDelegate {
     
     // MARK: - Accessors
     
-    class func shared() -> LocationServiceManager {
+    class func shared() -> CoreLocationServiceManager {
         return sharedLcationManager
     }
     
@@ -115,7 +117,7 @@ class CoreLocationServiceManager: NSObject, CLLocationManagerDelegate {
         
         
         // Post data
-        var userInfo = [RouteControllerNotificationUserInfoKey: CLLocationDirection] = [RouteControllerNotificationUserInfoKey.heading:heading]
+        var userInfo : [RouteControllerNotificationUserInfoKey: CLLocationDirection] = [RouteControllerNotificationUserInfoKey.heading:heading]
         
         let headingAccurcy:[RouteControllerNotificationUserInfoKey: CLLocationAccuracy] = [RouteControllerNotificationUserInfoKey.headingAccurcy:newHeading.headingAccuracy]
         
