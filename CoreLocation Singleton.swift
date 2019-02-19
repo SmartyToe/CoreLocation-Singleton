@@ -9,10 +9,8 @@
 import Foundation
 import CoreLocation
 
-protocol LocationServiceDelegate {
-    func tracingLocation(currentLocation: CLLocation)
-    func tracingLocationDidFailWithError(error: NSError)
-}
+
+// Singleton Pattern for core location manager
 
 class CoreLocationServiceManager: NSObject, CLLocationManagerDelegate {
     
@@ -117,7 +115,7 @@ class CoreLocationServiceManager: NSObject, CLLocationManagerDelegate {
         
         
         // Post data
-        var userInfo : [RouteControllerNotificationUserInfoKey: CLLocationDirection] = [RouteControllerNotificationUserInfoKey.heading:heading]
+        let userInfo : [RouteControllerNotificationUserInfoKey: CLLocationDirection] = [RouteControllerNotificationUserInfoKey.heading:heading]
         
         let headingAccurcy:[RouteControllerNotificationUserInfoKey: CLLocationAccuracy] = [RouteControllerNotificationUserInfoKey.headingAccurcy:newHeading.headingAccuracy]
         
@@ -132,7 +130,7 @@ class CoreLocationServiceManager: NSObject, CLLocationManagerDelegate {
         return true
     }
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        
+        // handle error
     }
     
     
